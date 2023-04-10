@@ -35,7 +35,6 @@ const StockList = () => {
 
         // prevent setStock call if component is NOT mounted
         if (isMounted) {
-          console.log(('set stock', isMounted, data));
           setStock(data);
         }
       } catch (err) {}
