@@ -1,9 +1,17 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
+
+const lsKey = 'watchList';
 
 export const WatchListContext = createContext();
 
 export const WatchListContextProvider = ({ children }) => {
-  const [watchList, setWatchList] = useState(['GOOGL', 'MSFT', 'AMZN']);
+  const [watchList, setWatchList] = useState(
+    JSON.parse(localStorage.getItem(lsKey)) || ['GOOGL', 'MSFT', 'AMZN']
+  );
+
+  useEffect(() => {
+    localStorage.setItem(lsKey, JSON.stringify(watchList));
+  }, [watchList]);
 
   const addStock = (stock) => {
     if (!watchList.includes(stock)) {
